@@ -1,6 +1,5 @@
 <?php
 
-// src/AppBundle/Command/CreateUserCommand.php
 namespace Thinker\Command;
 
 use Symfony\Component\Console\Input\InputOption;
@@ -13,40 +12,44 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ControllerCommand extends Command {
 
+    /**
+     * 命令文件目录
+     * @var null|string
+     */
     private $dir;
 
     public function __construct($dir) {
         parent::__construct();
-
         $this->dir = $dir;
     }
 
-    /**
-     * 配置
-     * @author  Kingz Cheung <kingzcheung@gmail.com>
-     */
     protected function configure() {
         $this
-            // the name of the command (the part after "bin/console")
+            //设置命令名称
             ->setName('make:controller')
-            // the short description shown while running "php bin/console list"
+            //描述
             ->setDescription('创建一个控制器.')
-            // the full command description shown when running the command with
-            // the "--help" option
+            //帮助 --help 中的描述
             ->setHelp("创建一个控制器.")
+            //添加参数
             ->addArgument('controller', InputArgument::REQUIRED, '控制器名称.')
+            //添加选项
             ->addOption('module', 'N', InputOption::VALUE_OPTIONAL, '模块名称,TP框架采用模块化的设计,可能需要确认控制器生成的模块.', 'Home');
     }
 
+
     protected function execute(InputInterface $input, OutputInterface $output) {
 
+        //获取参数与选项
         $controllername = $input->getArgument(('controller'));
         $module = $input->getOption('module');
 
+        //生成控制器文件
         $tpl = new CreateController($this->dir, $module);
         $tpl->create($controllername);
 
+        //打印成功信息
         $output->writeln('<info>>>>' . $input->getArgument('controller') . ' - 控制器创建成功。</info>');
-        $output->writeln($input->getOption('module'));
+        //$output->writeln($input->getOption('module'));
     }
 }
