@@ -10,11 +10,12 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use Command\TestCommand;
+use Thinker\Command\TestCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
+
 $application->add(new TestCommand("hello console"));
-$application->add(new \Command\CreateUserCommand());
-$application->add(new \Command\ControllerCommand());
+$application->add(new \Thinker\Command\ControllerCommand(__DIR__));
+
 $application->run();

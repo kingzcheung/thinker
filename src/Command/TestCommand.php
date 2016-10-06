@@ -7,7 +7,7 @@
  * @author  Kingz Cheung <kingzcheung@gmail.com>
  */
 
-namespace Command;
+namespace Thinker\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

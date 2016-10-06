@@ -6,8 +6,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Command\\": "src/Command",
-            "Template\\": "src/Template"
-        }
+            "Thinker\\": "src/"
+        },
+        "files": [
+            "src/Func/function.php"
+        ]
     }
 }

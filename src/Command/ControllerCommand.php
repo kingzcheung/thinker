@@ -1,16 +1,26 @@
 <?php
 
 // src/AppBundle/Command/CreateUserCommand.php
-namespace Command;
+namespace Thinker\Command;
 
+use Symfony\Component\Console\Input\InputOption;
+use Thinker\Create\CreateController;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Template\ClassTemp;
-use Template\CreateFile;
+
 
 class ControllerCommand extends Command {
+
+    private $dir;
+
+    public function __construct($dir) {
+        parent::__construct();
+
+        $this->dir = $dir;
+    }
+
     /**
      * 配置
      * @author  Kingz Cheung <kingzcheung@gmail.com>
@@ -23,26 +33,20 @@ class ControllerCommand extends Command {
             ->setDescription('创建一个控制器.')
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp("创建一个控制器...")
-            ->addArgument('controller', InputArgument::REQUIRED, 'The username of the user.');
+            ->setHelp("创建一个控制器.")
+            ->addArgument('controller', InputArgument::REQUIRED, '控制器名称.')
+            ->addOption('module', 'N', InputOption::VALUE_OPTIONAL, '模块名称,TP框架采用模块化的设计,可能需要确认控制器生成的模块.', 'Home');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        // ...
-        // outputs multiple lines to the console (adding "\n" at the end of each line)
-        $output->writeln([
-            '+-----------------------+',
-            ' 创建控制器 ',
-            '+-----------------------+',
-            '',
-        ]);
-
-        // outputs a message without adding a "\n" at the end of the line
-        $output->write('<info>你已经成功创建了一个控制器: ');
-        $output->writeln($input->getArgument('controller').'</info>');
 
         $controllername = $input->getArgument(('controller'));
+        $module = $input->getOption('module');
 
-        $output->writeln(CreateFile::create($controllername));
+        $tpl = new CreateController($this->dir, $module);
+        $tpl->create($controllername);
+
+        $output->writeln('<info>>>>' . $input->getArgument('controller') . ' - 控制器创建成功。</info>');
+        $output->writeln($input->getOption('module'));
     }
 }
