@@ -1,0 +1,10 @@
+<?php
+namespace Home\Controller;
+
+use Think\Controller;
+
+class {$controller$} extends Controller {
+    public function hello() {
+        echo 'hello,thinkphp!';
+    }
+}

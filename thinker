@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Created by PhpStorm.
+ * User: kingzcheung
+ * Date: 2016/10/5
+ * Time: 22:27
+ * @author  Kingz Cheung <kingzcheung@gmail.com>
+ */
+
+require __DIR__.'/vendor/autoload.php';
+
+use Command\TestCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+$application->add(new TestCommand("hello console"));
+$application->add(new \Command\CreateUserCommand());
+$application->add(new \Command\ControllerCommand());
+$application->run();

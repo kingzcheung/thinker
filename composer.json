@@ -1,0 +1,13 @@
+{
+    "name": "kingzcheung/thinker",
+    "description": "a CLI tool of thinkPHP",
+    "require": {
+        "symfony/console": "@stable"
+    },
+    "autoload": {
+        "psr-4": {
+            "Command\\": "src/Command",
+            "Template\\": "src/Template"
+        }
+    }
+}
