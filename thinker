@@ -8,14 +8,18 @@
  * @author  Kingz Cheung <kingzcheung@gmail.com>
  */
 
-require __DIR__.'/vendor/autoload.php';
+/**
+ * 假如在 Public 目录下初始化第三方库（这里只是一个假设,事实上可以放在其他目录,只要下面的引入正确）
+ * 引入 autoload 文件
+ */
+require_once __DIR__ . '/Public/vendor/autoload.php';
 
-use Thinker\Command\TestCommand;
-use Symfony\Component\Console\Application;
+/**
+ * 初始化应用目录,需要把当前目录作为参数
+ */
+$app = new Thinker\Application\App(__DIR__);
 
-$application = new Application();
-
-$application->add(new TestCommand("hello console"));
-$application->add(new \Thinker\Command\ControllerCommand(__DIR__));
-
-$application->run();
+/**
+ * 选择实例
+ */
+$app->runner();
