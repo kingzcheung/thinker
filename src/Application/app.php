@@ -23,6 +23,7 @@ class App {
     public function runner() {
         $this->application->add(new \Thinker\Command\TestCommand($this->root));
         $this->application->add(new \Thinker\Command\ControllerCommand($this->root));
+        $this->application->add(new \Thinker\Command\ModelCommand($this->root));
 
         $this->application->run();
     }

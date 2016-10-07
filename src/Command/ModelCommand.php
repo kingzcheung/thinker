@@ -2,15 +2,16 @@
 
 namespace Thinker\Command;
 
-use Thinker\Create\CreateController;
 use Symfony\Component\Console\Input\InputOption;
+use Thinker\Create\CreateController;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Thinker\Create\CreateModel;
 
 
-class ControllerCommand extends Command {
+class ModelCommand extends Command {
 
     /**
      * 命令文件目录
@@ -26,13 +27,13 @@ class ControllerCommand extends Command {
     protected function configure() {
         $this
             //设置命令名称
-            ->setName('make:controller')
+            ->setName('make:model')
             //描述
-            ->setDescription('创建一个控制器')
+            ->setDescription('创建一个模型类')
             //帮助 --help 中的描述
-            ->setHelp("创建一个控制器,比如创建 IndexController.class.php ,参数只需要写 Index")
+            ->setHelp("创建一个模型类,比如创建 ArticleModel.class.php,参数为 Article")
             //添加参数
-            ->addArgument('controller', InputArgument::REQUIRED, '控制器名称.')
+            ->addArgument('model', InputArgument::REQUIRED, '模型类名称.')
             //添加选项
             ->addOption('module', 'm', InputOption::VALUE_OPTIONAL, '模块名称,TP框架采用模块化的设计,可能需要确认控制器生成的模块.', 'Home');
     }
@@ -41,15 +42,15 @@ class ControllerCommand extends Command {
     protected function execute(InputInterface $input, OutputInterface $output) {
 
         //获取参数与选项
-        $controllername = $input->getArgument(('controller'));
+        $controllername = $input->getArgument(('model'));
         $module = $input->getOption('module');
 
         //生成控制器文件
-        $tpl = new CreateController($this->dir, $module);
+        $tpl = new CreateModel($this->dir, $module);
         $tpl->create($controllername);
 
         //打印成功信息
-        $output->writeln('<info>>>>' . $input->getArgument('controller') . 'Controller - 控制器创建成功。</info>');
+        $output->writeln('<info>>>>' . $input->getArgument('model') . 'Model - 模型类创建成功</info>');
         //$output->writeln($input->getOption('module'));
     }
 }

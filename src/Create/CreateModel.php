@@ -10,14 +10,14 @@
 namespace Thinker\Create;
 
 
-class CreateController extends Create {
+class CreateModel extends Create {
 
     /**
      * 创建类型为控制器
      *
      * @var string
      */
-    private $type = 'controller';
+    private $type = 'model';
 
     /**
      * 命令文件（thinker）所在的目录
@@ -45,17 +45,17 @@ class CreateController extends Create {
      */
     public function __construct($rootPath = '', $module = 'Home') {
         $this->rootPath = $rootPath;
-        $this->filedir = $this->rootPath . '/Application/' . $module . '/Controller/';
+        $this->filedir = $this->rootPath . '/Application/' . $module . '/Model/';
         $this->module = $module;
     }
 
     /**
-     * 生成控制器
+     *  模型
      * @param $name
      */
     public function create($name) {
         $temp = $this->getTmpl($this->type);
-        $temp = str_replace('{$controller$}', $name, $temp);
+        $temp = str_replace('{$model$}', $name, $temp);
         $temp = str_replace('{$module$}', $this->module, $temp);
 
         $path = $this->filename($name);
@@ -90,8 +90,8 @@ class CreateController extends Create {
      * @param $name
      * @return string
      */
-    private function filename($name) {
-        return $this->filedir . $name . 'Controller.class.php';
+    public function filename($name) {
+        return $this->filedir . $name . 'Model.class.php';
     }
 
 
