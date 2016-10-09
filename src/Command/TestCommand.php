@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  */
 class TestCommand extends Command {
-    public function __construct($msg) {
+    public function __construct($msg = 'test') {
         $this->msg = $msg;
         parent::__construct();
     }

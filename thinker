@@ -27,5 +27,5 @@ $app = new Thinker\Application\App(__DIR__);
 /**
  * 选择实例
  */
-$app->runner();
+$app->run();
 

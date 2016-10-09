@@ -16,15 +16,16 @@ class App {
     private $application;
 
     public function __construct($root) {
-        $this->root = $root;
+        $this->root        = $root;
         $this->application = new Application();
     }
 
-    public function runner() {
-        $this->application->add(new \Thinker\Command\TestCommand($this->root));
-        $this->application->add(new \Thinker\Command\ControllerCommand($this->root));
-        $this->application->add(new \Thinker\Command\ModelCommand($this->root));
-
+    public function run() {
+        $cmd = cfg('command', 'cmd');
+        foreach ($cmd as $value) {
+            $class    = new \ReflectionClass($value);
+            $this->application->add($class->newInstance($this->root));
+        }
         $this->application->run();
     }
 }

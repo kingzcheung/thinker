@@ -7,6 +7,4 @@
  * @author  Kingz Cheung <kingzcheung@gmail.com>
  */
 
-return [
-    "test"=>[1,2,3]
-];
+return [];
