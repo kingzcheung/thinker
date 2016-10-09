@@ -39,7 +39,7 @@ class ModuleCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         $module = new CreateModule($this->dir,$input->getArgument('moduleName'));
-
-        $output->writeln($module->getModuleDir());
+        $module->createModule();
+        $output->writeln('添加成功');
     }
 }

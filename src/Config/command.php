@@ -11,9 +11,9 @@
 
 return [
     'command' => [
-        'test'            => ['name'=>'','description'=>'','help'=>'','cmd'=>'\Thinker\Command\TestCommand'],
-        'make.controller' => ['name'=>'','description'=>'','help'=>'','cmd'=>'\Thinker\Command\ControllerCommand'],
-        'make.model'      => ['name'=>'','description'=>'','help'=>'','cmd'=>'\Thinker\Command\ModelCommand'],
-        'make.module'     => ['name'=>'','description'=>'','help'=>'','cmd'=>'\Thinker\Command\ModuleCommand'],
+        'test'            => '\Thinker\Command\TestCommand',
+        'make.controller' => '\Thinker\Command\ControllerCommand',
+        'make.model'      => '\Thinker\Command\ModelCommand',
+        'make.module'     => '\Thinker\Command\ModuleCommand',
     ]
 ];

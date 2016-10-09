@@ -1,7 +1,5 @@
 <?php
 
-$arr = [
-  'a.b'=>123
-];
+$dir = '/private/var/www/freeproj/thinkphp/Application/Home';
 
-var_dump($arr['a.b']);
+var_dump(scandir($dir));

@@ -21,9 +21,9 @@ class App {
     }
 
     public function run() {
-        $cmd = cfg('command', 'cmd');
+        $cmd = cfg('command', 'command');
         foreach ($cmd as $value) {
-            $class    = new \ReflectionClass($value);
+            $class = new \ReflectionClass($value);
             $this->application->add($class->newInstance($this->root));
         }
         $this->application->run();
