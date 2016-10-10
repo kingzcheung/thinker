@@ -10,6 +10,7 @@
 namespace Thinker\Application;
 
 use Symfony\Component\Console\Application;
+use Thinker\Tools\Config;
 
 class App {
     private $root;
@@ -21,7 +22,7 @@ class App {
     }
 
     public function run() {
-        $cmd = cfg('command', 'command');
+        $cmd = Config::get('command', 'command');
         foreach ($cmd as $value) {
             $class = new \ReflectionClass($value);
             $this->application->add($class->newInstance($this->root));

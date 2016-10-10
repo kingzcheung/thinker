@@ -84,34 +84,37 @@ CFG;
         return $configContent;
     }
 
-    private function mkModule($permission = 0777) {
 
-        //创建 Common
-        mkdir($this->moduleDir . '/Common', $permission, true);
-        file_put_contents($this->moduleDir . '/Common/index.html', '');
-        file_put_contents($this->moduleDir . '/Conf/function.php', '');
+    /**
+     * 生成模块所需要的目录
+     * @param int $permission
+     */
+    public function mkModule($permission = 0777) {
+        $moduleDirArr = Config::get('moduleDir');
+        $keys         = array_keys($moduleDirArr);
+        //添加目录
 
-        //添加 conf 并添加 config.php和 index.html
-        mkdir($this->moduleDir . '/Conf', $permission, true);
-        file_put_contents($this->moduleDir . '/Conf/config.php', $this->configContent());
-        file_put_contents($this->moduleDir . '/Conf/index.html', '');
-        //添加 Controller 和 index.html
-        mkdir($this->moduleDir . '/Controller', $permission, true);
-        file_put_contents($this->moduleDir . '/Controller/index.html', '');
-        //添加 Model 和 index.html
-        mkdir($this->moduleDir . '/Model', $permission, true);
-        file_put_contents($this->moduleDir . '/Model/index.html', '');
-        //添加 View 和 index.html
-        mkdir($this->moduleDir . '/View', $permission, true);
-        file_put_contents($this->moduleDir . '/View/index.html', '');
-        //添加模块下的 index
-        file_put_contents($this->moduleDir . '/index.html', '');
+        foreach ($keys as $key) {
+            //文件夹不能为数据
+            if (is_numeric($key)) continue;
+
+            mkdir($this->moduleDir . '/' . $key, $permission, true);
+            //添加文件
+            foreach (array_values($moduleDirArr[$key]) as $item) {
+                if ($item === 'config.php') {
+                    file_put_contents($this->moduleDir . '/' . $key . '/' . $item, $this->configContent());
+                } else {
+                    file_put_contents($this->moduleDir . '/' . $key . '/' . $item, '');
+                }
+            }
+        }
+
     }
 
-//    public function mkModule($permission = 0777) {
-//
-//    }
-
+    /**
+     * 补全生成目标模块的目录
+     * @param int $permission
+     */
     public function fillModule($permission = 0777) {
         $moduleDirArr = Config::get('moduleDir');
 
