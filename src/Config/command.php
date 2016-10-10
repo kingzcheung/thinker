@@ -12,6 +12,7 @@
 return [
     'command' => [
         'test'            => '\Thinker\Command\TestCommand',
+        'debug'           => '\Thinker\Command\DebugCommand',
         'make.controller' => '\Thinker\Command\ControllerCommand',
         'make.model'      => '\Thinker\Command\ModelCommand',
         'make.module'     => '\Thinker\Command\ModuleCommand',
