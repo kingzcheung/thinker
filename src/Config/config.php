@@ -7,4 +7,13 @@
  * @author  Kingz Cheung <kingzcheung@gmail.com>
  */
 
-return [];
+return [
+    'moduleDir' => [
+        'Common'     => ['index.html'],
+        'Conf'       => ['config.php', 'index.html'],
+        'Controller' => ['index.html'],
+        'Model'      => ['index.html'],
+        'View'       => ['index.html'],
+        'index.html'
+    ]
+];
