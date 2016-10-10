@@ -86,7 +86,6 @@ CFG;
 
     private function mkModule($permission = 0777) {
 
-
         //创建 Common
         mkdir($this->moduleDir . '/Common', $permission, true);
         file_put_contents($this->moduleDir . '/Common/index.html', '');
@@ -107,6 +106,10 @@ CFG;
         file_put_contents($this->moduleDir . '/View/index.html', '');
         //添加模块下的 index
         file_put_contents($this->moduleDir . '/index.html', '');
+    }
+
+    public function mkModule($permission = 0777) {
+
     }
 
     public function fillModule($permission = 0777) {
