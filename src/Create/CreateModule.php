@@ -108,9 +108,9 @@ CFG;
         file_put_contents($this->moduleDir . '/index.html', '');
     }
 
-    public function mkModule($permission = 0777) {
-
-    }
+//    public function mkModule($permission = 0777) {
+//
+//    }
 
     public function fillModule($permission = 0777) {
         $moduleDirArr = Config::get('moduleDir');
