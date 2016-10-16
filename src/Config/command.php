@@ -13,8 +13,10 @@ return [
     'command' => [
         'test'            => '\Thinker\Command\TestCommand',
         'debug'           => '\Thinker\Command\DebugCommand',
+        'clear'           => '\Thinker\Command\ClearCommand',
         'make.controller' => '\Thinker\Command\ControllerCommand',
         'make.model'      => '\Thinker\Command\ModelCommand',
         'make.module'     => '\Thinker\Command\ModuleCommand',
+
     ]
 ];
