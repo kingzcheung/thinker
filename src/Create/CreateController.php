@@ -40,13 +40,19 @@ class CreateController extends Create {
     private $module;
 
     /**
+     * @var string 对应视图目录
+     */
+    private $viewdir;
+
+    /**
      * CreateController constructor.
      * @param string $rootPath
      */
     public function __construct($rootPath = '', $module = 'Home') {
         $this->rootPath = $rootPath;
-        $this->filedir = $this->rootPath . '/Application/' . $module . '/Controller/';
-        $this->module = $module;
+        $this->filedir  = $this->rootPath . '/Application/' . $module . '/Controller/';
+        $this->viewdir  = $this->rootPath . '/Application/' . $module . '/View/';
+        $this->module   = $module;
     }
 
     /**
@@ -61,6 +67,16 @@ class CreateController extends Create {
         $path = $this->filename($name);
 
         $this->saveAsFile($path, $temp);
+    }
+
+    /**
+     * 创建对应的视图目录
+     * @param $root
+     * @param string $name
+     */
+    public function createViewDir($name = '') {
+        $viewDir = $this->viewdir . $name;
+        mkdir($viewDir, 0777, true);
     }
 
     /**
