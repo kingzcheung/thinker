@@ -55,6 +55,5 @@ class ControllerCommand extends Command {
         
         //打印成功信息
         $output->writeln('<info>>>>' . $input->getArgument('controller') . 'Controller - 控制器创建成功。</info>');
-        $output->writeln($input->getOption('view'));
     }
 }
