@@ -22,7 +22,7 @@ class App {
     }
 
     public function run() {
-        $cmd = Config::get('command', 'command');
+        $cmd = Config::get('command')['command'];
         foreach ($cmd as $value) {
             $class = new \ReflectionClass($value);
             $this->application->add($class->newInstance($this->root));

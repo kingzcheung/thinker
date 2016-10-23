@@ -19,7 +19,14 @@ class Config {
      */
     private static function loadConfig($configName = 'config') {
         $path = pathinfo(__DIR__);
-        return include $path['dirname'] . '/Config/' . $configName . '.php';
+        $file = $path['dirname'] . '/Config/' . $configName . '.php';
+
+        if (is_file($file)) {
+            return include $file;
+        } else {
+            return false;
+        }
+
     }
 
 
@@ -29,8 +36,11 @@ class Config {
      * @param string $configName 配置文件名(不包含后缀)
      * @return bool|mixed        返回配置信息
      */
-    public static function get($name = '', $configName = 'config') {
-        $config = self::loadConfig($configName);
+    public static function get($name = '') {
+        $config = self::loadConfig('config');
+
+        //小写
+        //$name = strtolower($name);
 
         if (!$config) return false;
         //没有参数时,获取所有参数
@@ -38,10 +48,28 @@ class Config {
 
         //获取单个参数
         if (is_string($name)) {
+
+            if (is_string($config[$name]) && strpos($config[$name], '.php') > 0) {
+                $cfgs          = self::extraFile($config[$name]);
+                $config[$name] = $cfgs;
+            }
             return $config[$name];
         } else {
             return false;
         }
+    }
 
+    /**
+     * 配置中加载额外的配置文件
+     *
+     * @param $load         加载的文件名
+     * @return bool|mixed   返回文件内容
+     */
+    public static function extraFile($load) {
+        //查找 value 中带有.php 的
+        $extraFile = dirname(__DIR__) . '/Config/' . $load;
+        if (is_file($extraFile)) {
+            return include $extraFile;
+        } else return false;
     }
 }

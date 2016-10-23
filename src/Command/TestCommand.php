@@ -12,6 +12,7 @@ namespace Thinker\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Thinker\Tools\Config;
 
 /**
  *
@@ -31,6 +32,15 @@ class TestCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         $output->writeln("<comment>" . $this->msg . "</comment>");
+
+        $this->extraFileTest();
+    }
+
+    //测试加载额外配置
+    private function extraFileTest() {
+        //var_dump(Config::extraFile('command.php'));
+
+        var_dump(Config::get('command')['command']);
     }
 }
 

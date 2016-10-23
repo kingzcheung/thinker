@@ -32,7 +32,7 @@ class ClearCommand extends Command {
 
     private function cmdName($c = __CLASS__) {
         $class = '\\' . $c;
-        $cmds  = Config::get('command', 'command');
+        $cmds  = Config::get('command')['command'];
         return array_search($class, $cmds);
     }
 
