@@ -31,7 +31,7 @@ class ControllerCommand extends Command {
             //描述
             ->setDescription('创建一个控制器')
             //帮助 --help 中的描述
-            ->setHelp("创建一个控制器,比如创建 IndexController.class.php ,参数只需要写 Index")
+            ->setHelp("创建一个控制器,比如创建 IndexController.class.php ,参数只需要写 Index;也可以通过[module/controller]的形式")
             //添加参数
             ->addArgument('controller', InputArgument::REQUIRED, '控制器名称.')
             //添加选项
