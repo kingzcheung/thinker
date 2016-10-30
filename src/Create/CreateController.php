@@ -47,6 +47,7 @@ class CreateController extends Create {
     /**
      * CreateController constructor.
      * @param string $rootPath
+     * @param string $module
      */
     public function __construct($rootPath = '', $module = 'Home') {
         $this->rootPath = $rootPath;
@@ -58,8 +59,24 @@ class CreateController extends Create {
     /**
      * 生成控制器
      * @param $name
+     * @param null $call
+     * @return mixed|void
      */
-    public function create($name) {
+    public function create($name, $call = null) {
+
+        //如果是模块/控制器的形式
+        if (stripos($name, '/') !== false) {
+            $controllerName = explode('/', $name);
+            $this->module   = $controllerName[0];
+            $name           = $controllerName[1];
+
+            //如果模块不存在,则创建模块
+            $mod = $this->rootPath . '/Application/' .$this->module;
+            if (!is_dir($mod)){
+                call_user_func($call, $this->module);
+            }
+        }
+
         $temp = $this->getTmpl($this->type);
         $temp = str_replace('{$controller$}', $name, $temp);
         $temp = str_replace('{$module$}', $this->module, $temp);
@@ -69,9 +86,9 @@ class CreateController extends Create {
         $this->saveAsFile($path, $temp);
     }
 
+
     /**
      * 创建对应的视图目录
-     * @param $root
      * @param string $name
      */
     public function createViewDir($name = '') {
