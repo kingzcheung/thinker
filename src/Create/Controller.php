@@ -13,26 +13,16 @@ namespace Thinker\Create;
 class Controller extends Template {
     private $controller;
     private $view;
-    private $tmpl;
 
     public function __construct($dir, $inputName = '') {
         parent::__construct($dir, $inputName);
         $this->controller = $inputName;
         $this->view       = strstr($inputName, 'Controller',true);
-        list($this->module, $this->controller) = $this->getModuleNameAndControllerName($inputName);
+        list($this->module, $this->controller) = $this->getModuleAndName($inputName);
         $this->tmpl = __DIR__ . '/Template/controller.tmpl';
     }
 
-    private function getModuleNameAndControllerName($control) {
-        if (strpos($control, '/') !== false) {
-            list($module, $controller) = explode('/', $control);
-        } else {
-            $module     = 'Home';
-            $controller = $control;
-        }
 
-        return [$module, $controller];
-    }
 
     protected function getControllerDir() {
         return $this->getModuleDir() . '/Controller/';

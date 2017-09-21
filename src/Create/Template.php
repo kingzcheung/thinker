@@ -15,6 +15,7 @@ abstract class Template {
     protected $dir;
     protected $module;
     protected $application = 'Application/';
+    protected $tmpl;
 
     public function __construct($dir, $inputName = '') {
         $this->dir  = $dir;
@@ -25,4 +26,16 @@ abstract class Template {
         return $this->dir . '/' .$this->application. $this->module;
     }
 
+    protected function getModuleAndName($name) {
+        if (strpos($name, '/') !== false) {
+            list($module, $controller) = explode('/', $name);
+        } else {
+            $module     = 'Home';
+            $controller = $name;
+        }
+
+        return [$module, $controller];
+    }
+
+    public abstract function create();
 }
