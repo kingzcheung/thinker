@@ -39,18 +39,25 @@ class ControllerCommand extends Command {
             ->addOption('view', '', InputOption::VALUE_OPTIONAL, '视图目录,启动此选项则在生成控制器的同时添加对应的视图目录.', true);
     }
 
+    //实现 php thinker make:controller Home/TestController 命令
 
     protected function execute(InputInterface $input, OutputInterface $output) {
 
         //获取参数与选项
-        $controllername = $input->getArgument(('controller'));
-        $module         = $input->getOption('module');
+        $arg = $input->getArgument(('controller'));
+
+        if (strpos($arg,'/') !== false){
+            list($module,$controller) = explode('/',$arg);
+        }else {
+            $module = 'Home';
+            $controller = $arg;
+        }
 
         //生成控制器文件
         $tpl = new CreateController($this->dir, $module);
 
         $self = $this;
-        $tpl->create($controllername, function ($module) use ($self, $output) {
+        $tpl->create($controller, function ($module) use ($self, $output) {
             $cmd  = $self->getApplication()->find('make:module');
             $args = [
                 'command'    => 'make:module',
@@ -61,7 +68,7 @@ class ControllerCommand extends Command {
         });
         //生成视图目录
         if ($input->getOption('view')) {
-            $tpl->createViewDir($controllername);
+            $tpl->createViewDir($controller);
         }
 
         //打印成功信息

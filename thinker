@@ -17,7 +17,7 @@
  * 假如在 Public 目录下初始化第三方库（这里只是一个假设,事实上可以放在其他目录,只要下面的引入正确）
  * 引入 autoload 文件
  */
-require_once __DIR__ . '/Public/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * 初始化应用目录,需要把当前目录作为参数
