@@ -68,7 +68,7 @@ class ControllerCommand extends Command {
         });
         //生成视图目录
         if ($input->getOption('view')) {
-            $tpl->createViewDir($controllername);
+            $tpl->createViewDir($controller);
         }
 
         //打印成功信息
