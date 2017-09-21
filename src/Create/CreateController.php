@@ -92,7 +92,7 @@ class CreateController extends Create {
      * @param string $name
      */
     public function createViewDir($name = '') {
-        $viewDir = $this->viewdir . $name;
+        $viewDir = $this->viewdir . trim($name,'Controller');
         mkdir($viewDir, 0777, true);
     }
 
