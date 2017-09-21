@@ -16,9 +16,8 @@ class Controller extends Template {
 
     public function __construct($dir, $inputName = '') {
         parent::__construct($dir, $inputName);
-        $this->controller = $inputName;
-        $this->view       = strstr($inputName, 'Controller',true);
         list($this->module, $this->controller) = $this->getModuleAndName($inputName);
+        $this->view       = strstr($this->controller, 'Controller',true);
         $this->tmpl = __DIR__ . '/Template/controller.tmpl';
     }
 
@@ -52,6 +51,7 @@ class Controller extends Template {
 
     public function createView() {
         $viewFile = $this->getViewDir() . $this->view;
+
         if (!is_dir($viewFile)){
             mkdir($viewFile,0777,true);
         }
