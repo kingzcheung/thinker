@@ -124,7 +124,7 @@ class CreateController extends Create {
      * @return string
      */
     private function filename($name) {
-        return $this->filedir . $name . 'Controller.class.php';
+        return $this->filedir . $name . '.class.php';
     }
 
 
