@@ -21,8 +21,6 @@ class Controller extends Template {
         $this->tmpl = __DIR__ . '/Template/controller.tmpl';
     }
 
-
-
     protected function getControllerDir() {
         return $this->getModuleDir() . '/Controller/';
     }

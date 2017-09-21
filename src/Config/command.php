@@ -11,7 +11,6 @@
 
 return [
     'command' => [
-        'test'            => '\Thinker\Command\TestCommand',
         'debug'           => '\Thinker\Command\DebugCommand',
         'clear'           => '\Thinker\Command\ClearCommand',
         'make.controller' => '\Thinker\Command\ControllerCommand',
