@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Thinker\Create\CreateModel;
+use Thinker\Create\Model;
 
 
 class ModelCommand extends Command {
@@ -33,24 +34,26 @@ class ModelCommand extends Command {
             //帮助 --help 中的描述
             ->setHelp("创建一个模型类,比如创建 ArticleModel.class.php,参数为 Article")
             //添加参数
-            ->addArgument('model', InputArgument::REQUIRED, '模型类名称.')
-            //添加选项
-            ->addOption('module', 'm', InputOption::VALUE_OPTIONAL, '模块名称,TP框架采用模块化的设计,可能需要确认控制器生成的模块.', 'Home');
+            ->addArgument('model', InputArgument::REQUIRED, '模型类名称.');
     }
 
 
     protected function execute(InputInterface $input, OutputInterface $output) {
 
         //获取参数与选项
-        $controllername = $input->getArgument(('model'));
-        $module = $input->getOption('module');
+        $model = $input->getArgument(('model'));
 
         //生成控制器文件
-        $tpl = new CreateModel($this->dir, $module);
-        $tpl->create($controllername);
+        $m = new Model($this->dir,$model);
+        list($result,$msg) = $m->create();
+
+        if (!$result) {
+            $output->writeln('<error>' . $msg . '</error>');
+            return;
+        }
 
         //打印成功信息
-        $output->writeln('<info>>>>' . $input->getArgument('model') . 'Model - 模型类创建成功</info>');
+        $output->writeln('<info>>>>' . $msg . '</info>');
         //$output->writeln($input->getOption('module'));
     }
 }
