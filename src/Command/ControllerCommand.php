@@ -35,9 +35,6 @@ class ControllerCommand extends Command {
             ->setHelp("创建一个控制器,比如创建 IndexController.class.php ,参数只需要写 Index;也可以通过[module/controller]的形式")
             //添加参数
             ->addArgument('controller', InputArgument::REQUIRED, '控制器名称.');
-        //添加选项
-//            ->addOption('module', 'm', InputOption::VALUE_OPTIONAL, '模块名称,TP框架采用模块化的设计,可能需要确认控制器生成的模块.', 'Home')
-//            ->addOption('view', '', InputOption::VALUE_OPTIONAL, '视图目录,启动此选项则在生成控制器的同时添加对应的视图目录.', true);
     }
 
     //实现 php thinker make:controller Home/TestController 命令
